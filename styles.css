@@ -1,0 +1,255 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #000428, #004e92);
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: white;
+    position: relative;
+}
+
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    animation: twinkle 5s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 1; }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #f8f8f8;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.game-info {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.message-box {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.2rem;
+    text-align: center;
+    flex-direction: column;
+}
+
+.numbers-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+    perspective: 1000px;
+}
+
+.number-card {
+    background: linear-gradient(45deg, #2b32b2, #1488cc);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.number-card:hover {
+    transform: translateY(-5px) rotateY(10deg);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.number-card.wrong {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: scale(0.8);
+}
+
+.number-card.correct {
+    animation: correct 1s infinite;
+    background: linear-gradient(45deg, #56ab2f, #a8e063);
+    transform: scale(1.2);
+    box-shadow: 0 0 30px rgba(120, 255, 120, 0.7);
+}
+
+@keyframes correct {
+    0%, 100% { box-shadow: 0 0 20px rgba(120, 255, 120, 0.7); }
+    50% { box-shadow: 0 0 40px rgba(120, 255, 120, 1); }
+}
+
+.controls {
+    margin-top: 30px;
+    text-align: center;
+}
+
+button {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 75, 43, 0.4);
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(255, 75, 43, 0.6);
+}
+
+.attempts {
+    margin-top: 20px;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.planet {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.7;
+    z-index: 0;
+}
+
+#planet1 {
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle at 30% 30%, #ffdb58, #ff6b6b);
+    top: 10%;
+    right: 5%;
+    box-shadow: 0 0 50px rgba(255, 219, 88, 0.5);
+}
+
+#planet2 {
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle at 70% 70%, #a7d7e8, #6ea4ca);
+    bottom: 15%;
+    left: 8%;
+    box-shadow: 0 0 40px rgba(167, 215, 232, 0.5);
+}
+
+.meteor {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background-color: white;
+    opacity: 0;
+    transform: rotate(45deg);
+}
+
+.meteor::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 1px;
+    background: linear-gradient(to right, white, transparent);
+    transform-origin: left center;
+}
+
+.success-message {
+    color: #7fff7f;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.success-details {
+    margin-top: 5px;
+}
+
+@keyframes meteor {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0) rotate(45deg);
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translate(500px, 500px) rotate(45deg);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .number-card {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .number-card {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .game-info {
+        font-size: 1rem;
+    }
+}
